@@ -69,22 +69,23 @@
       <File filePath="src/container.4gl"/>
       <File filePath="src/container.per"/>
     </Application>
-    <Library binaryName="lib_login" id="-1010625895" label="lib_login">
+    <ExtProject filePath="../g2_lib/g2_lib.4pw" id="1836661206"/>
+    <Library binaryName="lib_login" dependencies="1836661206_14000" id="-1010625895" label="lib_login">
       <File filePath="src/lib_login.4gl"/>
       <File filePath="src/login.per"/>
     </Library>
-    <Application binaryName="menu" dependencies="14000,1986" id="18736" label="menu">
+    <Application binaryName="menu" dependencies="14000,1986,1836661206_14000" id="18736" label="menu">
       <File filePath="src/menu.4gl"/>
       <File filePath="src/menu.per"/>
       <File filePath="src/menuLib.4gl"/>
       <File filePath="src/new_acct.4gl"/>
       <File filePath="src/new_acct.per"/>
     </Application>
-    <Application binaryName="menu_mnt" id="744200128" label="menu_mnt">
+    <Application binaryName="menu_mnt" dependencies="1836661206_14000" id="744200128" label="menu_mnt">
       <File filePath="src/menu_mnt.4gl"/>
       <File filePath="src/menu_mnt.per"/>
     </Application>
-    <Application binaryName="user_mnt" id="2535444" label="user_mnt">
+    <Application binaryName="user_mnt" dependencies="1836661206_-2003847556,1836661206_14000" id="2535444" label="user_mnt">
       <File filePath="src/user_mnt.4gl"/>
       <File filePath="src/user_mnt.per"/>
       <File filePath="etc/users.4rp"/>
