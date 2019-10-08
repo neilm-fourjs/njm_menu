@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+<StyleList>
+  <!--Style name="UserInterface">
+    <StyleAttribute name="browserMultiPage" value="yes" />
+  </Style-->
+  <Style name="TextEdit.plain">
+     <StyleAttribute name="textFormat" value="plain" />
+  </Style>
+  <Style name="Window.main">
+     <StyleAttribute name="windowType" value="normal" />
+     <StyleAttribute name="startMenuPosition" value="tree" />
+     <StyleAttribute name="tabbedContainer" value="yes" /> 
+		<StyleAttribute name="actionPanelPosition" value="none" />
+		<StyleAttribute name="ringMenuPosition" value="none" />
+  </Style>
+</StyleList>

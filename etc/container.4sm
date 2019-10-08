@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+<StartMenu>
+  <StartMenuGroup text="Programs">
+    <StartMenuCommand image="fa-industry" text="Products" exec="fglrun prods C"/>
+    <StartMenuCommand image="fa-bookmark" text="Quotes" exec="fglrun quotes C"/>
+    <StartMenuCommand image="fa-cog" text="Customers" exec="fglrun custs C"/>
+    <StartMenuCommand image="fa-shopping-cart" text="Web Shopping" exec="fglrun webOE C"/>
+    <StartMenuCommand image="fa-shopping-cart" text="Web Shopping 2" exec="fglrun webOE2 C"/>
+    <StartMenuCommand image="fa-shopping-cart" text="Order Entry" exec="fglrun orderEntry C 1"/>
+  </StartMenuGroup>
+  <StartMenuGroup text="Utils">
+    <StartMenuCommand image="fab-font-awesome-flag" text="Font Awesume Viewer" exec="fglrun fontAwesome.42r C"/>
+    <StartMenuCommand image="fa-file-code-o" text="Material Design Test" exec="fglrun materialDesignTest.42r C"/>
+  </StartMenuGroup>
+  <StartMenuGroup text="WebComponent Demos">
+    <StartMenuCommand image="fa-bar-chart" text="amCharts" exec="fglrun wc_amCharts.42r C"/>
+    <StartMenuCommand image="fa-bar-chart" text="d4Charts" exec="fglrun wc_d3charts_demo.42r C"/>
+    <StartMenuCommand image="fa-map" text="Google Maps" exec="fglrun wc_googleMaps.42r C"/>
+    <StartMenuCommand image="fa-music" text="Music" exec="fglrun wc_music.42r C"/>
+    <StartMenuCommand image="fa-plane" text="Aircraft Galley" exec="fglrun wc_aircraft.42r C"/>
+  </StartMenuGroup>
+</StartMenu>

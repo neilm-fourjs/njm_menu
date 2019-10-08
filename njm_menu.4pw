@@ -67,14 +67,22 @@
   <Group environment="value:DBNAME=njm_demo_db" id="75644415" label="njm_menu" language="Genero">
     <Application binaryName="container" id="1347713174" label="container">
       <File filePath="src/container.4gl"/>
+      <File filePath="etc/container.4sm"/>
+      <File filePath="etc/container.4st"/>
+      <File filePath="etc/container.4tb"/>
       <File filePath="src/container.per"/>
     </Application>
+    <Library binaryName="etc" id="1742005202" label="etc">
+      <File filePath="etc/default.4ad"/>
+      <File filePath="etc/default_GBC.4st"/>
+      <File filePath="etc/default_GDC.4st"/>
+    </Library>
     <ExtProject filePath="../g2_lib/g2_lib.4pw" id="1836661206"/>
     <Library binaryName="lib_login" dependencies="1836661206_14000,1265940743_1986" id="-1010625895" label="lib_login">
       <File filePath="src/lib_login.4gl"/>
       <File filePath="src/login.per"/>
     </Library>
-    <Application binaryName="menu" dependencies="14000,1986,1836661206_14000,1265940743_1986" id="18736" label="menu">
+    <Application binaryName="menu" dependencies="14000,1986,1836661206_14000,1265940743_1986,1742005202" id="18736" label="menu">
       <File filePath="src/menu.4gl"/>
       <File filePath="src/menu.per"/>
       <File filePath="src/menuLib.4gl"/>
