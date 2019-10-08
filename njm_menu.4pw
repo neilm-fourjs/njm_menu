@@ -99,6 +99,9 @@
       <File filePath="src/OpenIdLogin.inc"/>
       <File filePath="src/OpenIdLogin.per"/>
     </Application>
+    <Library binaryName="user_lib" dependencies="1265940743_1986,1836661206_14000" id="1172432040" label="user_lib">
+      <File filePath="src/user_lib.4gl"/>
+    </Library>
     <Application binaryName="user_mnt" dependencies="1836661206_-2003847556,1836661206_14000,1265940743_1986" id="2535444" label="user_mnt">
       <File filePath="src/user_mnt.4gl"/>
       <File filePath="src/user_mnt.per"/>

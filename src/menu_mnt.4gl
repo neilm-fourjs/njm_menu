@@ -5,14 +5,14 @@ IMPORT FGL g2_appInfo
 IMPORT FGL g2_about
 IMPORT FGL g2_db
 
-IMPORT FGL app_lib
-&include "schema.inc"
-&include "app.inc"
+IMPORT FGL user_lib
 
-CONSTANT C_PRGVER = "3.2"
+&include "schema.inc"
+
 CONSTANT C_PRGDESC = "Menu Maintenance Demo"
 CONSTANT C_PRGAUTH = "Neil J.Martin"
 CONSTANT C_PRGICON = "logo_dark"
+CONSTANT C_PRGVER = "3.2"
 
 &define RECNAME sys_menus.*
 &define TABNAMEQ "sys_menus"
@@ -66,7 +66,7 @@ MAIN
 
   CALL m_db.g2_connect(NULL)
 
-  IF NOT app_lib.checkUserRoles(m_user_key, "System Admin", TRUE) THEN
+  IF NOT user_lib.checkUserRoles(m_user_key, "System Admin", TRUE) THEN
     EXIT PROGRAM
   END IF
 
@@ -109,7 +109,7 @@ MAIN
                     "Confirm", "Toggle activate state for users role?", "No", "Yes|No", "question")
                 = "Yes"
             THEN
-          LET m_mroles[arr_curr()].active = app_lib.toggle(m_mroles[arr_curr()].active)
+          LET m_mroles[arr_curr()].active = user_lib.toggle(m_mroles[arr_curr()].active)
           CALL setSave_menu(TRUE)
         END IF
       ON ACTION removeRoles
@@ -134,7 +134,7 @@ MAIN
     END DISPLAY
 
     BEFORE DIALOG
-      CALL app_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
+      CALL user_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
       CALL setSave_menu(FALSE)
 
     ON ACTION quit
@@ -151,7 +151,7 @@ MAIN
       IF m_recs.getLength() > 0 THEN
         CALL showRow(1)
       END IF
-      CALL app_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
+      CALL user_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
 
     ON ACTION insert
       LET m_func = "N"
@@ -191,16 +191,16 @@ MAIN
 
     ON ACTION nextrow
       CALL showRow(m_row + 1)
-      CALL app_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
+      CALL user_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
     ON ACTION prevrow
       CALL showRow(m_row - 1)
-      CALL app_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
+      CALL user_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
     ON ACTION firstrow
       CALL showRow(1)
-      CALL app_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
+      CALL user_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
     ON ACTION lastrow
       CALL showRow(m_recs.getLength())
-      CALL app_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
+      CALL user_lib.setActions(m_row, m_recs.getLength(), m_allowedActions)
     ON ACTION about
 			CALL g2_about.g2_about(m_appInfo)
   END DIALOG
@@ -284,7 +284,7 @@ END FUNCTION
 FUNCTION delete()
   DEFINE l_stmt STRING
 
-  IF NOT app_lib.checkUserRoles(m_user_key, "Delete", TRUE) THEN
+  IF NOT user_lib.checkUserRoles(m_user_key, "Delete", TRUE) THEN
     RETURN FALSE
   END IF
 
@@ -325,7 +325,7 @@ FUNCTION update()
     ERROR % "Nothing changed!"
     RETURN TRUE
   END IF
-  IF NOT app_lib.checkUserRoles(m_user_key, "System Admin Update", TRUE) THEN
+  IF NOT user_lib.checkUserRoles(m_user_key, "System Admin Update", TRUE) THEN
     RETURN FALSE
   END IF
   LET l_stmt = "SELECT * FROM " || TABNAMEQ || " WHERE " || KEYFLDQ || " = '" || m_rec.KEYFLD || "'"
@@ -450,7 +450,7 @@ END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION saveRoles_menu()
   DEFINE x SMALLINT
-  IF NOT app_lib.checkUserRoles(m_user_key, "System Admin Update", TRUE) THEN
+  IF NOT user_lib.checkUserRoles(m_user_key, "System Admin Update", TRUE) THEN
     CALL setSave_menu(FALSE)
     RETURN
   END IF

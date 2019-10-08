@@ -7,10 +7,9 @@ IMPORT FGL g2_db
 IMPORT FGL g2_secure
 IMPORT FGL g2_grw
 
-IMPORT FGL app_lib
+IMPORT FGL user_lib
 
 &include "schema.inc"
-&include "app.inc"
 
 CONSTANT C_PRGDESC = "User Maintenance Demo"
 CONSTANT C_PRGAUTH = "Neil J.Martin"
@@ -53,14 +52,14 @@ MAIN
 
   DISPLAY "Env AppUser:", fgl_getenv("APPUSER")
 
-  IF NOT app_lib.checkUserRoles(m_this_user_key, "System Admin", TRUE) THEN
+  IF NOT user_lib.checkUserRoles(m_this_user_key, "System Admin", TRUE) THEN
     EXIT PROGRAM
   END IF
 
   DECLARE u_cur CURSOR FOR SELECT * FROM sys_users
   FOREACH u_cur INTO m_user[m_user.getLength() + 1].*
     LET m_fullname[m_user.getLength()] =
-        app_lib.getFullName(
+        user_lib.getFullName(
             m_user[m_user.getLength()].salutation,
             m_user[m_user.getLength()].forenames,
             m_user[m_user.getLength()].surname)
@@ -124,7 +123,7 @@ MAIN
                     "Confirm", "Toggle activate state for users role?", "No", "Yes|No", "question")
                 = "Yes"
             THEN
-          LET m_uroles[arr_curr()].active = app_lib.toggle(m_uroles[arr_curr()].active)
+          LET m_uroles[arr_curr()].active = user_lib.toggle(m_uroles[arr_curr()].active)
           CALL setSave_user(TRUE)
         END IF
       ON ACTION removeRoles
@@ -146,7 +145,7 @@ MAIN
                     "Confirm", "Toggle activate state for this role?", "No", "Yes|No", "question")
                 = "Yes"
             THEN
-          LET m_roles[arr_curr()].active = app_lib.toggle(m_roles[arr_curr()].active)
+          LET m_roles[arr_curr()].active = user_lib.toggle(m_roles[arr_curr()].active)
         END IF
       ON DRAG_START(dnd)
         LET m_drag_source = "roles"
@@ -315,7 +314,7 @@ FUNCTION saveUser()
     UPDATE sys_users SET sys_users.* = m_user_rec.* WHERE sys_users.user_key = m_user_rec.user_key
   END IF
   LET m_fullname[x] =
-      app_lib.getFullName(m_user_rec.salutation, m_user_rec.forenames, m_user_rec.surname)
+      user_lib.getFullName(m_user_rec.salutation, m_user_rec.forenames, m_user_rec.surname)
   LET m_user[x].* = m_user_rec.*
   LET m_save = FALSE
   LET m_saveUser = FALSE
@@ -325,7 +324,7 @@ END FUNCTION
 FUNCTION saveRoles_user()
   DEFINE x SMALLINT
 
-  IF NOT app_lib.checkUserRoles(m_this_user_key, "System Admin Update", TRUE) THEN
+  IF NOT user_lib.checkUserRoles(m_this_user_key, "System Admin Update", TRUE) THEN
     CALL setSave_user(FALSE)
     RETURN
   END IF
