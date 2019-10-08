@@ -82,6 +82,10 @@
       <File filePath="src/lib_login.4gl"/>
       <File filePath="src/login.per"/>
     </Library>
+    <Application binaryName="login_hist" dependencies="1836661206_14000,1265940743_1986" id="1119056397" label="login_hist">
+      <File filePath="src/login_hist.4gl"/>
+      <File filePath="src/login_hist.per"/>
+    </Application>
     <Application binaryName="menu" dependencies="14000,1986,1836661206_14000,1265940743_1986,1742005202" id="18736" label="menu">
       <File filePath="src/menu.4gl"/>
       <File filePath="src/menu.per"/>

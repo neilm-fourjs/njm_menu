@@ -9,7 +9,6 @@ IMPORT FGL lib_login
 IMPORT FGL new_acct
 
 &include "schema.inc"
-&include "app.inc"
 
 CONSTANT C_PRGDESC = "NJM's Demos Login History"
 CONSTANT C_PRGAUTH = "Neil J.Martin"
