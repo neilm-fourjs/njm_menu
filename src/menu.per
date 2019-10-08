@@ -1,0 +1,64 @@
+
+&include "schema.inc"
+
+LAYOUT ( TEXT="NJM's Menu", STYLE="centered", MINWIDTH=50, MINHEIGHT=16  )
+GRID (STYLE="menu formborder")
+{
+ [titl                             ]
+<T menu                             >
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+ [a|desc                           ]
+<                                   >
+ [: :l_user:f001              :   :]
+ [: :l_renderer:rd:               :]
+ [:  :back :close:logout:about:   :]
+ [sp1:logo                     :sp2]
+     [                         ]
+}
+END -- GRID
+END -- LAYOUT
+
+TABLES
+sys_menus
+
+ATTRIBUTES
+
+LABEL titl = FORMONLY.l_titl,STYLE="heading",JUSTIFY=CENTER;
+
+TABLE menu : menu, STYLE="menu oneclick",WANTFIXEDPAGESIZE ;
+PHANTOM sys_menus.menu_key;
+PHANTOM sys_menus.m_id;
+PHANTOM sys_menus.m_pid;
+a = sys_menus.m_type, STYLE="hidden";
+desc = sys_menus.m_text,STYLE="menuopts em14",IMAGECOLUMN=m_img;
+PHANTOM sys_menus.m_item;
+PHANTOM sys_menus.m_passw;
+PHANTOM FORMONLY.m_img;
+
+LABEL l_user : l_user, TEXT=%"User:",STYLE="small";
+LABEL f001 = FORMONLY.userName, SIZEPOLICY=DYNAMIC,STYLE="small";
+LABEL l_renderer : l_renderer,TEXT=%"Universal Renderer:", JUSTIFY=RIGHT;
+BUTTON rd : renderer_toggle,TEXT="",IMAGE="fa-toggle-off", STYLE="noborder";
+
+--BUTTON accept : accept, TEXT=%"Select", IMAGE="fa-arrow-circle-right";
+BUTTON back : back, TEXT=%"Back", IMAGE="fa-arrow-circle-left";
+BUTTON close : close, TEXT="Quit", IMAGE="fa-power-off";
+BUTTON logout : logout, TEXT="Quit + Logout", IMAGE="fa-power-off";
+BUTTON about : about, TEXT="About", IMAGE="help";
+
+IMAGE sp1 : spacer, IMAGE="fa-fw", STRETCH=X, STYLE="noborder";
+IMAGE logo = FORMONLY.logo, AUTOSCALE, SIZEPOLICY=INITIAL,STRETCH=NONE, STYLE="noborder center";
+IMAGE sp2 : spacer, IMAGE="fa-fw", STRETCH=X, STYLE="noborder";
+
+INSTRUCTIONS
+SCREEN RECORD menu [12] ( menu_key THRU m_img )

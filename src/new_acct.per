@@ -1,0 +1,98 @@
+
+#+ New account form
+
+&include "schema.inc"
+
+TOOLBAR
+	ITEM accept
+	ITEM cancel
+END -- Toolbar
+
+LAYOUT ( TEXT="Your Details", WINDOWSTYLE="main2", IMAGE="fa-user" )
+GRID
+{
+[user_key  |r1|f001        ]  [r                                  ]
+[email     |r6|f007                                               ]
+[salutation|r2|f003        ]                         [photo       ]
+[forenames |r3|f004                                  |            ]
+[surname   |r4|f005                              ]   [            ]
+[position  |r5|f006                                  |            ]
+[comment   |r7|f008                                  |            ]
+              [                                      |            ]
+[user_type |r8|f009        ]
+[active    |ra|a]
+[forcepwch |rd|b]
+[""]          [generate            ]
+[passwd    |rp|p001                              ]
+[rules                                                            ]
+[                                                                 ]
+[                                                                 ]
+[                                                                 ]
+[passexp   |pe|p002             ]
+[gbctheme  |bc|f010                                  ]
+[photo_uri |ph|f011                                               ]
+}
+END -- GRID
+END -- LAYOUT
+
+TABLES
+sys_users
+
+ATTRIBUTES
+LABEL r  : r , TEXT="( * = Required )",STYLE="required",JUSTIFY=CENTER;
+LABEL r1 : r1, TEXT="",STYLE="required",HIDDEN;
+LABEL r2 : r2, TEXT="",STYLE="required",HIDDEN;
+LABEL r3 : r3, TEXT="*",STYLE="required";
+LABEL r4 : r4, TEXT="*",STYLE="required";
+LABEL r5 : r5, TEXT="",STYLE="required";
+LABEL r6 : r6, TEXT="*",STYLE="required";
+LABEL r7 : r7, TEXT="",STYLE="required";
+LABEL r8 : r8, TEXT="*",STYLE="required";
+LABEL ra : ra, TEXT="",STYLE="required";
+LABEL rd : rd, TEXT="",STYLE="required";
+LABEL rp : rp, TEXT="*",STYLE="required";
+LABEL pe : pe, TEXT="*",STYLE="required";
+LABEL bc : bc, TEXT="",STYLE="required";
+LABEL ph : ph, TEXT="",STYLE="required";
+
+LABEL user_key    : lc, TEXT=%"Account Id:",JUSTIFY=RIGHT;
+LABEL email			 : em, TEXT=%"Email:",JUSTIFY=RIGHT;
+LABEL salutation : sl, TEXT=%"Saluation:",JUSTIFY=RIGHT;
+LABEL forenames	 : fn, TEXT=%"First Name:",JUSTIFY=RIGHT;
+LABEL surname		 : sn, TEXT=%"Last Name:",JUSTIFY=RIGHT;
+LABEL position	 : ps, TEXT=%"Job Title:",JUSTIFY=RIGHT;
+LABEL comment		 : cm, TEXT=%"Comment:",JUSTIFY=RIGHT;
+LABEL user_type	 : ut, TEXT=%"User Type:",JUSTIFY=RIGHT;
+LABEL active		 : ac, TEXT=%"Active:",JUSTIFY=RIGHT;
+LABEL forcepwch  : fp, TEXT=%"Force Pass Change:",JUSTIFY=RIGHT;
+LABEL passwd     : pw, TEXT=%"Password:", JUSTIFY=RIGHT;
+LABEL passexp    : pe, TEXT=%"Password Expires:",JUSTIFY=RIGHT;
+LABEL gbctheme   : bc, TEXT=%"GBC Theme:",JUSTIFY=RIGHT;
+LABEL photo_uri  : ph, TEXT=%"Photo URI:",JUSTIFY=RIGHT;
+
+f001 = sys_users.user_key, DEFAULT=0;
+f007 = sys_users.email, NOT NULL, REQUIRED, TABINDEX=1, DOWNSHIFT;
+f003 = sys_users.salutation, TABINDEX=2;
+f004 = sys_users.forenames, NOT NULL, REQUIRED, TABINDEX=3;
+f005 = sys_users.surname, NOT NULL, REQUIRED, TABINDEX=4;
+f006 = sys_users.position, TABINDEX=5;
+TEXTEDIT f008 = sys_users.comment, TABINDEX=6;
+COMBOBOX f009 = sys_users.acct_type,INITIALIZER=pop_combo,DEFAULT=1,NOT NULL, TABINDEX=7;
+CHECKBOX a = sys_users.active,VALUECHECKED=1,VALUEUNCHECKED=0,DEFAULT=1,NOT NULL;
+CHECKBOX b = sys_users.forcepwchg, VALUECHECKED="Y", VALUEUNCHECKED="N",NOT NULL;
+
+BUTTONEDIT p001 = sys_users.login_pass, INVISIBLE, VERIFY, NOT NULL, TABINDEX=8, ACTION=generate, IMAGE="fa-cog";
+TEXTEDIT rules = FORMONLY.l_rules, STRETCH=BOTH;
+BUTTON generate:generate, TEXT="Re-generate", IMAGE="fa-cog", HIDDEN;
+--EDIT p001 = sys_users.login_pass, NOENTRY, FONTPITCH=FIXED, NOT NULL, TABINDEX=8, STYLE="em12";
+
+DATEEDIT p002 = sys_users.pass_expire, NOT NULL, TABINDEX=9;
+
+COMBOBOX f010 = sys_users.gbc_theme, INITIALIZER=cb_gbc_theme, TABINDEX=10;
+f011 = sys_users.photo_uri, SCROLL, TABINDEX=11;
+IMAGE photo = FORMONLY.l_photo, AUTOSCALE, STYLE="noborder";
+
+PHANTOM sys_users.salt;
+PHANTOM sys_users.pass_hash;
+PHANTOM sys_users.hash_type;
+

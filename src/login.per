@@ -1,0 +1,77 @@
+
+#+ Login Form - used by lib_login
+
+LAYOUT (TEXT=%"Login",WINDOWSTYLE="dialog2 center grad2", IMAGE="fa-user-secret")
+
+GRID (STYLE="center")
+{
+<G logo_grid                             >
+ [sp1:logo                          :sp2]
+<                                        >
+<G grp1                                  >
+ [: :titl                            : :]
+ [""]
+ [l001                    ]
+ [f001                                  ]
+ [l002                    ]
+ [f002                    ]
+ [l003]
+ [openid        ]
+ [l004                    ]
+ [f004                    ]
+ [""]
+ [:    :accept :newacc :about :    :]
+<                                        >
+[""]
+<G grp2                                  >
+ [" "][l005                    ]
+ [" "][f005                    ]
+ [" "][l006                    ]
+ [" "][f006                    ]
+ [l_rules                               ]
+ [                                      ]
+ [                                      ]
+ [                                      ]
+ [                                      ]
+ [                                      ]
+ [                                      ]
+<                                        >
+}
+END -- GRID
+
+ATTRIBUTES
+GROUP logo_grid : logo_grid, STYLE="noborder", HIDDEN;
+IMAGE sp1 : spacer, IMAGE="fa-fw", STRETCH=X, STYLE="noborder";
+IMAGE logo = FORMONLY.m_logo_image, SIZEPOLICY=INITIAL, STYLE="noborder center";
+IMAGE sp2 : spacer, IMAGE="fa-fw", STRETCH=X, STYLE="noborder";
+
+GROUP grp1 : grp1, GRIDCHILDRENINPARENT,STYLE="login_g";
+
+LABEL titl : titl,TEXT=%"Welcome", SIZEPOLICY=DYNAMIC,JUSTIFY=CENTER,STYLE="heading";
+
+LABEL l001 : lemail,TEXT=%"Email:",COMMENT=%"Email address", STYLE="bold left";
+f001 = FORMONLY.l_login, NOT NULL,COMMENT=%"Email address", DOWNSHIFT,
+	PLACEHOLDER=%"Email Address", REQUIRED, SCROLL ;
+
+LABEL l002 : lpassw,TEXT=%"Password:", STYLE="bold left";
+BUTTONEDIT f002 = FORMONLY.l_pass, INVISIBLE, REQUIRED, NOT NULL,PLACEHOLDER=%"Password", ACTION=forgotten;
+
+LABEL l003 : lor,TEXT=%"Or Use:", STYLE="bold left";
+BUTTON openid : openid, TEXT=%"GoogleId", IMAGE="fab-google";
+
+LABEL l004 : ltheme,TEXT=%"Theme:", STYLE="bold left";
+COMBOBOX f004 = FORMONLY.l_theme, NOT NULL, INITIALIZER=cb_gbc_theme;
+
+GROUP grp2 : grp2, GRIDCHILDRENINPARENT,TEXT=%"Password Change:",HIDDEN;
+
+LABEL l005 : lpassw1,TEXT=%"New Password:", STYLE="bold";
+f005 = FORMONLY.l_pass1, INVISIBLE, REQUIRED, NOT NULL;
+LABEL l006 : lpassw2,TEXT=%"Confirm Password:", STYLE="bold";
+f006 = FORMONLY.l_pass2, INVISIBLE, REQUIRED, NOT NULL;
+TEXTEDIT l_rules = FORMONLY.l_rules, SCROLLBARS=NONE,STRETCH=BOTH,STYLE="small";
+
+BUTTON accept : accept, TEXT=%"Login",IMAGE="fa-user";
+BUTTON newacc : acct_new, TEXT=%"New User", IMAGE="fa-user-plus";
+
+--BUTTON forgotten : forgotten, TEXT=%"Reset Password?", IMAGE="fa-question-circle";
+BUTTON about : about, TEXT=%"About?", IMAGE="fa-info-circle";

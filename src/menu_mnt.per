@@ -1,0 +1,108 @@
+
+&include "schema.inc"
+
+LAYOUT (TEXT=%"Menu Maintenance", WINDOWSTYLE="main2")
+HBOX (SPLITTER)
+VBOX
+TABLE menu (DOUBLECLICK=dblclick,STYLE="nosel")
+{
+[u001                          ]
+[u001                          ]
+[u001                          ]
+[u001                          ]
+[u001                          ]
+[u001                          ]
+[u001                          ]
+[u001                          ]
+}
+END --TABLE
+GRID
+{
+[key         |f001 ]
+[id          |f002  ]
+[pid         |f003 ]
+[type        |f                             ]
+[text        |f005                          ]
+[item        |f006                          ]
+[pass        |f007    ]
+}
+END -- GRID
+END -- VBOX
+VBOX (SPLITTER)
+VBOX
+TABLE mroles (DOUBLECLICK=dblclick)
+{
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+}
+END -- TABLE
+GRID
+{
+[save  ][remove      ]
+}
+END -- GRID
+END -- VBOX
+TABLE roles
+{
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+}
+END -- TABLES
+END -- VBOX
+END -- LAYOUT
+
+TABLES
+sys_menus
+sys_roles
+sys_menu_roles
+
+ATTRIBUTES
+
+PHANTOM FORMONLY.key;
+u001 = FORMONLY.m_desc,TITLE="Menu items";
+
+LABEL key : lkey,  TEXT=%"Menu Key:", JUSTIFY=RIGHT;
+LABEL id : lid,TEXT=%"Id:", JUSTIFY=RIGHT;
+LABEL type : ltype,TEXT=%"Type:", JUSTIFY=RIGHT;
+LABEL pid : lpid,  TEXT=%"PID:", JUSTIFY=RIGHT;
+LABEL text : ltext,TEXT=%"Text:", JUSTIFY=RIGHT;
+LABEL item : litem,TEXT=%"Command:", JUSTIFY=RIGHT;
+LABEL pass : lpass,TEXT=%"Password:", JUSTIFY=RIGHT;
+
+f001 = sys_menus.menu_key;
+f002 = sys_menus.m_id;
+f003 = sys_menus.m_pid;
+COMBOBOX f = sys_menus.m_type,ITEMS=(("M",%"Menu"),("F",%"Genero Prog"),("P",%"Program"),("T",%"Title"),("C",%"Int Command"),("O",%"OS Command"));
+f005 = sys_menus.m_text;
+f006 = sys_menus.m_item;
+f007 = sys_menus.m_passw;
+
+BUTTON save : save;
+BUTTON remove : removeRoles;
+
+PHANTOM sys_menu_roles.menu_key;
+PHANTOM sys_menu_roles.role_key;
+ur01 = FORMONLY.role_name,TITLE="Menu Roles";
+CHECKBOX b = sys_menu_roles.active,VALUECHECKED="Y",VALUEUNCHECKED="N",NOT NULL;
+
+PHANTOM sys_roles.role_key;
+r = FORMONLY.role_type,TITLE="Typ",COMMENT="S=System,M=Menu,A=Action";
+r001 = FORMONLY.role_name2,TITLE="Roles";
+CHECKBOX c =  sys_roles.active,VALUECHECKED="Y",VALUEUNCHECKED="N",NOT NULL;
+
+INSTRUCTIONS
+SCREEN RECORD m_arr (FORMONLY.key,FORMONLY.m_desc)
+SCREEN RECORD mr_arr (sys_menu_roles.menu_key THRU sys_menu_roles.active)
+SCREEN RECORD r_arr (sys_roles.role_key THRU sys_roles.active)

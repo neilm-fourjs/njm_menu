@@ -1,0 +1,39 @@
+
+&include "schema.inc"
+
+TOOLBAR
+	ITEM quit
+	ITEM about
+END -- TOOLBAR
+
+LAYOUT (TEXT=%"Login History", IMAGE="fa-history", WINDOWSTYLE="main2")
+TABLE
+{
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+[a001              |a002|a003                |a004               |a005|a006                    ]
+}
+END -- TABLE
+
+TABLES
+sys_login_hist
+
+ATTRIBUTES
+PHANTOM sys_login_hist.hist_key;
+a001 = sys_login_hist.email, TITLE=%"Email";
+COMBOBOX a002 = sys_login_hist.stat, TITLE=%"Status",
+	ITEMS=(("I","Login"),("i","Logout"),("E","Error In"),("e","Error Out"),("A","Invalid A/C"),("P","Invalid Pass"),("C","Invalid Pass Chg"));
+a003 = sys_login_hist.last_login, TITLE=%"Logged In";
+a004 = sys_login_hist.loggedout, TITLE=%"Logged Out";
+a005 = sys_login_hist.client, TITLE=%"Client";
+a006 = sys_login_hist.client_ip, TITLE=%"Client IP";
+
+INSTRUCTIONS
+SCREEN RECORD scr_arr ( sys_login_hist.* )

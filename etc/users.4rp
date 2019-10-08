@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report:Report xmlns:rtl="http://www.4js.com/2004/RTL" xmlns:report="http://www.4js.com/2007/REPORT" xmlns="http://www.4js.com/2004/PXML" gstVersion="31402" version="6.00">
+    <report:Settings RWPageWidth="letterlength" RWPageLength="letterwidth" RWLeftMargin="0.5inch" RWTopMargin="0.5inch" RWRightMargin="0.5inch" RWBottomMargin="0.5inch">
+        <report:FormatList>
+            <report:Format-SVG/>
+            <report:Format-PDF/>
+            <report:Format-image/>
+        </report:FormatList>
+    </report:Settings>
+    <report:Data RWDataLocation="../src/sys/user_mnt.rdd" RWFglReportName="rpt"/>
+    <report:Conflicts/>
+    <rtl:stylesheet>
+        <PXML>
+            <rtl:match name="Report" nameConstraint="Report" minOccurs="1" maxOccurs="1">
+                <MINIPAGE name="Page Root" width="max" length="max">
+                    <LAYOUTNODE name="Page Header" width="max" length="min" port="anyPageHeader">
+                        <MINIPAGE name="StripeLayouter3" width="min" length="max" layoutDirection="leftToRight">
+                            <rtl:input-variable name="l_title" type="FGLString" expectedLocation="expectedAhead"/>
+                            <WORDBOX name="Report Title" x="1.2386" y="max*0.5" anchorX="0" anchorY="0.5" alignment="baseline" fontSize="25" baselineType="leftleft" floatingBehavior="enclosed" text="{{l_title}}"/>
+                            <PAGENOBOX name="PageNoBox" x="1.23857" y="max" anchorX="0" anchorY="1" alignment="baseline" baselineType="leftleft" floatingBehavior="enclosed" textAlignment="right"/>
+                        </MINIPAGE>
+                        <MINIPAGE name="Table Header" class="grwTableHeader" width="min" length="max" layoutDirection="leftToRight">
+                            <WORDBOX name="Spacer" alignment="baseline" baselineType="leftleft" port="itemSeparator" text=" "/>
+                            <WORDBOX name="l_user.surname Title" class="grwTableStringColumnTitle" width="{max(width(&quot;{&quot;Surname&quot;.translate()}&quot;),width(&quot;M&quot;)*25)}" alignment="near" floatingBehavior="enclosed" text="Name" localizeText="true"/>
+                            <WORDBOX name="l_user.position Title" class="grwTableStringColumnTitle" width="{max(width(&quot;{&quot;Position&quot;.translate()}&quot;),width(&quot;M&quot;)*10)}" alignment="near" floatingBehavior="enclosed" text="Position" localizeText="true"/>
+                            <WORDBOX name="l_user.email Title" class="grwTableStringColumnTitle" width="{max(width(&quot;{&quot;Email&quot;.translate()}&quot;),width(&quot;M&quot;)*20)}" floatingBehavior="enclosed" text="Email" localizeText="true"/>
+                            <WORDBOX name="l_user.acct_type Title" class="grwTableNumericColumnTitle" width="{max(width(&quot;{&quot;Acct Type&quot;.translate()}&quot;),width(&quot;-00000&quot;))}" floatingBehavior="enclosed" textAlignment="right" text="Acct Type" localizeText="true"/>
+                        </MINIPAGE>
+                        <MINIPAGE name="Separator" width="1" length="max" bgColor="#000000" layoutDirection="leftToRight"/>
+                    </LAYOUTNODE>
+                    <rtl:match name="FirstPageHeader" nameConstraint="FirstPageHeader" minOccurs="0" maxOccurs="1"/>
+                    <rtl:match name="OnEveryRow" nameConstraint="OnEveryRow" minOccurs="0" maxOccurs="unbounded">
+                        <MINIPAGE name="Table Row" class="grwTableRow" width="min" length="max" layoutDirection="leftToRight">
+                            <WORDBOX name="Spacer_1" alignment="baseline" baselineType="leftleft" port="itemSeparator" text=" "/>
+                            <rtl:input-variable name="l_user.salutation" type="FGLString" expectedLocation="expectedHere"/>
+                            <rtl:input-variable name="l_user.surname" type="FGLString" expectedLocation="expectedHere"/>
+                            <rtl:input-variable name="l_user.forenames" type="FGLString" expectedLocation="expectedHere"/>
+                            <WORDWRAPBOX name="l_user.surname Value" class="grwTableStringColumnValue" width="width(&quot;M&quot;)*25" alignment="baseline" floatingBehavior="enclosed" text="{{l_user.salutation.trim()+&quot; &quot;+l_user.surname.trim()+&quot;, &quot;+l_user.forenames.trim()}}"/>
+                            <rtl:input-variable name="l_user.position" type="FGLString" expectedLocation="expectedHere"/>
+                            <WORDWRAPBOX name="l_user.position Value" class="grwTableStringColumnValue" width="width(&quot;M&quot;)*10" alignment="baseline" floatingBehavior="enclosed" text="{{l_user.position}}"/>
+                            <rtl:input-variable name="l_user.email" type="FGLString" expectedLocation="expectedHere"/>
+                            <WORDWRAPBOX name="l_user.email Value" class="grwTableStringColumnValue" width="width(&quot;M&quot;)*20" floatingBehavior="enclosed" text="{{l_user.email}}"/>
+                            <rtl:input-variable name="l_user.acct_type" type="FGLNumeric" expectedLocation="expectedHere"/>
+                            <DECIMALFORMATBOX name="l_user.acct_type Value" class="grwTableNumericColumnValue" width="{max(width(&quot;{&quot;Acct Type&quot;.translate()}&quot;),width(&quot;-00000&quot;))}" anchorX="1" floatingBehavior="enclosed" textAlignment="right" format="-----#" value="{{l_user.acct_type}}"/>
+                        </MINIPAGE>
+                    </rtl:match>
+                </MINIPAGE>
+            </rtl:match>
+        </PXML>
+    </rtl:stylesheet>
+</report:Report>

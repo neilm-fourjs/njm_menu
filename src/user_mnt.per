@@ -1,0 +1,130 @@
+
+&include "schema.inc"
+
+TOOLBAR
+	ITEM quit
+	ITEM save
+	ITEM cancel
+	ITEM delete ( TEXT=%"Delete User" )
+	ITEM removeroles (TEXT=%"Remote Roles", IMAGE="fa-minus" )
+	ITEM addroles (TEXT=%"Add Roles", IMAGE="fa-plus" )
+	ITEM rpt
+END -- TOOLBAR
+
+LAYOUT (TEXT=%"User Maintenance", WINDOWSTYLE="main2")
+HBOX (SPLITTER)
+VBOX
+TABLE users (DOUBLECLICK=dblclick,STYLE="nosel")
+{
+[u001                      ]
+[u001                      ]
+[u001                      ]
+[u001                      ]
+[u001                      ]
+}
+END -- TABLE
+GRID
+{
+[uk        |f001 ]
+[sl        |f002                      ][photo ]
+[fn        |f003                      ][      ]
+[sn        |f004                      ][      ]
+[ps        |f005                      ][      ]
+[em        |f006                      ][      ]
+[cn        |f007                      ]
+[ut        |f008        ]
+[ac        |a ]
+[fp        |f ]
+[ht        |f010        ]
+[pw        |f011                ]
+[st        |f012                                ]
+[ph        |f013                                ]
+[pe        |f014        ]
+[te        |f015                                ]
+[pu        |f016                                ]
+}
+END -- GRID
+END -- VBOX
+VBOX (SPLITTER)
+TABLE uroles (DOUBLECLICK=dblclick)
+{
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+[ur01                     |b]
+}
+END -- TABLE
+TABLE roles (DOUBLECLICK=dblclick)
+{
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+[r|r001                     |c]
+}
+END -- TABLES
+END -- VBOX
+END -- HBOX
+END -- LAYOUT
+
+TABLES
+sys_users
+sys_roles
+sys_user_roles
+
+ATTRIBUTES
+
+u001 = FORMONLY.fullname,TITLE=%"Users";
+
+LABEL uk : uk,TEXT=%"User Key:", JUSTIFY=RIGHT;
+LABEL sl : sl,TEXT=%"Salution:", JUSTIFY=RIGHT;
+LABEL fn : fn,TEXT=%"Forenames:", JUSTIFY=RIGHT;
+LABEL sn : sn,TEXT=%"Surname:", JUSTIFY=RIGHT;
+LABEL ps : ps,TEXT=%"Position:", JUSTIFY=RIGHT;
+LABEL em : em,TEXT=%"Email:", JUSTIFY=RIGHT;
+LABEL cn : cn,TEXT=%"Comment:", JUSTIFY=RIGHT;
+LABEL ut : ut,TEXT=%"User Type:", JUSTIFY=RIGHT;
+LABEL ac : ac,TEXT=%"Active:", JUSTIFY=RIGHT;
+LABEL fp : fp,TEXT=%"Force Pw Chg:", JUSTIFY=RIGHT;
+LABEL ht : ht,TEXT=%"Hash Type:", JUSTIFY=RIGHT;
+LABEL pw : pw,TEXT=%"Password:", JUSTIFY=RIGHT;
+LABEL st : st,TEXT=%"Salt:", JUSTIFY=RIGHT, HIDDEN;
+LABEL ph : ph,TEXT=%"Password Hash:", JUSTIFY=RIGHT, HIDDEN;
+LABEL pe : pe,TEXT=%"Password Expire:", JUSTIFY=RIGHT;
+LABEL te : te,TEXT=%"GBC Theme:", JUSTIFY=RIGHT;
+LABEL pu : pu,TEXT=%"Photo URI:", JUSTIFY=RIGHT;
+
+f001 = sys_users.user_key;
+f002 = sys_users.salutation;
+f003 = sys_users.forenames;
+f004 = sys_users.surname;
+f005 = sys_users.position;
+f006 = sys_users.email, DOWNSHIFT;
+f007 = sys_users.comment;
+COMBOBOX f008 = sys_users.acct_type, ITEMS=((1,"User"),(2,"Admin")),DEFAULT=1,NOT NULL;
+CHECKBOX a = sys_users.active, VALUECHECKED=1,VALUEUNCHECKED=0,NOT NULL;
+CHECKBOX f = sys_users.forcepwchg, VALUECHECKED="Y",VALUEUNCHECKED="N",NOT NULL;
+f010 = sys_users.hash_type, NOENTRY;
+f011 = sys_users.login_pass, VERIFY,INVISIBLE;
+f012 = sys_users.salt, NOENTRY, HIDDEN;
+f013 = sys_users.pass_hash, NOENTRY, HIDDEN, SCROLL;
+DATEEDIT f014 = sys_users.pass_expire;
+f015 = sys_users.gbc_theme;
+f016 = sys_users.photo_uri, SCROLL;
+IMAGE photo = FORMONLY.l_photo, AUTOSCALE, STRETCH=BOTH, STYLE="noborder";
+
+PHANTOM sys_user_roles.user_key;
+PHANTOM sys_user_roles.role_key;
+ur01 = FORMONLY.role_name,TITLE=%"User Roles";
+CHECKBOX b = sys_user_roles.active,VALUECHECKED="Y",VALUEUNCHECKED="N",NOT NULL;
+
+PHANTOM sys_roles.role_key;
+r = FORMONLY.role_type,TITLE="Typ",COMMENT=%"S=System,M=Menu,A=Action";
+r001 = FORMONLY.role_name2,TITLE="Roles";
+CHECKBOX c =  sys_roles.active,VALUECHECKED="Y",VALUEUNCHECKED="N",NOT NULL;
+
+INSTRUCTIONS
+SCREEN RECORD u_arr (FORMONLY.fullname)
+SCREEN RECORD ur_arr (sys_user_roles.user_key THRU sys_user_roles.active)
+SCREEN RECORD r_arr (sys_roles.role_key THRU sys_roles.active)
