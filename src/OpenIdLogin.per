@@ -1,0 +1,24 @@
+LAYOUT (TEXT="OpenId login", STYLE="naked bg_white")
+GRID
+{
+[:  :f001         :  :]
+[:s1:f006         :s2:]
+[                     ]
+[                     ]
+[                     ]
+[                     ]
+[                     ]
+[                     ]
+[:  :close        :  :]
+}
+END -- GRID
+
+ATTRIBUTES
+
+LABEL f001 = FORMONLY.name, SIZEPOLICY=DYNAMIC, STYLE="title";
+IMAGE s1 : spacer, IMAGE="fa-fw", STRETCH=X, STYLE="noborder";
+IMAGE f006 = FORMONLY.img, AUTOSCALE, STYLE="noborder center", STRETCH=BOTH;
+IMAGE s2 : spacer, IMAGE="fa-fw", STRETCH=X, STYLE="noborder";
+
+
+BUTTON close : close,TEXT="Close";

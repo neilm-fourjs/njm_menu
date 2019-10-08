@@ -1,0 +1,15 @@
+<APPLICATION Parent="defaultgwc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/3.10/cfextwa.xsd">
+	<RESOURCE Id="res.path.demo" Source="INTERNAL">$(res.deployment.path)</RESOURCE>
+	<EXECUTION>
+		<ENVIRONMENT_VARIABLE Id="FGLRESOURCEPATH">.</ENVIRONMENT_VARIABLE>
+		<PATH>$(res.path.demo)</PATH>
+		<MODULE>OpenIdLogin.42r</MODULE>
+		<DELEGATE service="njmOpenIDConnectServiceProvider" >
+			<IDP>https://accounts.google.com</IDP>
+			<SCOPE>email</SCOPE>
+			<CLIENT_PUBLIC_ID>xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com</CLIENT_PUBLIC_ID>
+			<CLIENT_SECRET_ID>xxx-xxxx-xxxxxxxxxxxxxxx</CLIENT_SECRET_ID>
+			<AUTHORIZATION>fglrun AccessProgram</AUTHORIZATION>			
+		</DELEGATE>
+	</EXECUTION>
+</APPLICATION>

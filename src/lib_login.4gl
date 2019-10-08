@@ -9,8 +9,11 @@ IMPORT FGL g2_appInfo
 IMPORT FGL g2_about
 IMPORT FGL g2_secure
 &include "schema.inc"
-&include "app.inc"
+
 &include "OpenIdLogin.inc"
+
+CONSTANT C_DEF_USER_EMAIL = "test@test.com"
+CONSTANT C_DEF_USER_PASSWD = "T3st.T3st"
 
 -- Callback function for creating a new account.
 TYPE f_new_account
