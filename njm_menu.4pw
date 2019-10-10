@@ -64,7 +64,7 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group environment="value:DBNAME=njm_demo_db" id="75644415" label="njm_menu" language="Genero" targetDirectory="$(ProjectDir)/../njm_app_bin">
+  <Group environment="value:CUSTOM_DB=custom_db.json,value:FJS_GL_DBGLEV=3,value:DBNAME=njm_demo_db" id="75644415" label="njm_menu" language="Genero" targetDirectory="$(ProjectDir)/../njm_app_bin">
     <Application binaryName="container" id="1347713174" label="container">
       <File filePath="src/container.4gl"/>
       <File filePath="etc/container.4sm"/>
@@ -86,18 +86,18 @@
       <File filePath="src/login_hist.4gl"/>
       <File filePath="src/login_hist.per"/>
     </Application>
-    <Application binaryName="menu" dependencies="14000,1986,1836661206_14000,1265940743_1986,1742005202" id="18736" label="menu">
+    <Application binaryName="menu_mnt" dependencies="1836661206_14000,1265940743_1986" id="744200128" label="menu_mnt">
+      <File filePath="src/menu_mnt.4gl"/>
+      <File filePath="src/menu_mnt.per"/>
+    </Application>
+    <ExtProject filePath="../njm_demo_db/njm_demo_db.4pw" id="1265940743"/>
+    <Application binaryName="njm_menu" dependencies="14000,1986,1836661206_14000,1265940743_1986,1742005202,-1010625895" id="18736" label="njm_menu">
       <File filePath="src/menu.4gl"/>
       <File filePath="src/menu.per"/>
       <File filePath="src/menuLib.4gl"/>
       <File filePath="src/new_acct.4gl"/>
       <File filePath="src/new_acct.per"/>
     </Application>
-    <Application binaryName="menu_mnt" dependencies="1836661206_14000,1265940743_1986" id="744200128" label="menu_mnt">
-      <File filePath="src/menu_mnt.4gl"/>
-      <File filePath="src/menu_mnt.per"/>
-    </Application>
-    <ExtProject filePath="../njm_demo_db/njm_demo_db.4pw" id="1265940743"/>
     <Application binaryName="openIdLogin" id="-1354588802" label="openIdLogin">
       <File filePath="src/OpenIdLogin.4gl"/>
       <File filePath="src/OpenIdLogin.inc"/>
