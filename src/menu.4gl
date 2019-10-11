@@ -24,6 +24,10 @@ DEFINE m_appInfo g2_appInfo.appInfo
 MAIN
 
   CALL m_appInfo.progInfo(C_PRGDESC, C_PRGAUTH, C_PRGVER, C_PRGICON)
+
+	CALL menuLib.setResourcePath()
+	CALL menuLib.setImagePath()
+
 	CALL g2_lib.g2_init( ARG_VAL(1), "default")
   WHENEVER ANY ERROR CALL g2_lib.g2_error
   CALL ui.Interface.setText(C_PRGDESC)

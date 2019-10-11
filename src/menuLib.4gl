@@ -40,8 +40,6 @@ FUNCTION do_menu(l_logo STRING, l_appInfo g2_appInfo.appInfo INOUT)
 		CALL l_form.setElementHidden("renderer_toggle", TRUE)
 		CALL l_form.setElementHidden("l_renderer", TRUE)
 	END IF
-	CALL setResourcePath()
-	CALL setImagePath()
 
   DISPLAY l_logo TO logo
   CALL ui.Interface.setText(l_appInfo.progDesc)
