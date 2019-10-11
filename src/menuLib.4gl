@@ -6,6 +6,8 @@ IMPORT FGL lib_login
 
 &include "schema.inc"
 
+CONSTANT C_RESOURCEPATHLIST = "../etc/resourcePath.txt"
+CONSTANT C_IMAGEPATHLIST = "../etc/imagePath.txt"
 PUBLIC DEFINE m_curMenu SMALLINT
 PUBLIC DEFINE m_args STRING
 
@@ -38,6 +40,8 @@ FUNCTION do_menu(l_logo STRING, l_appInfo g2_appInfo.appInfo INOUT)
 		CALL l_form.setElementHidden("renderer_toggle", TRUE)
 		CALL l_form.setElementHidden("l_renderer", TRUE)
 	END IF
+	CALL setResourcePath()
+	CALL setImagePath()
 
   DISPLAY l_logo TO logo
   CALL ui.Interface.setText(l_appInfo.progDesc)
@@ -266,3 +270,31 @@ FUNCTION swap_nat_ur(l_renderer STRING) RETURNS ()
 	LET m_prf = m_prf.subString(1,x-1)||"profile."||l_renderer
 END FUNCTION
 --------------------------------------------------------------------------------
+FUNCTION setResourcePath() RETURNS ()
+	DEFINE l_pathList STRING
+	DEFINE l_c base.Channel
+	IF NOT os.path.exists(C_RESOURCEPATHLIST) THEN RETURN END IF
+	LET l_c = base.Channel.create()
+	CALL l_c.openFile(C_RESOURCEPATHLIST,"r")
+	WHILE NOT l_c.isEof()
+		LET l_pathList = l_pathList.append( l_c.readLine())||os.path.pathSeparator()
+	END WHILE
+	DISPLAY "ResourcePath:",l_pathList
+	CALL fgl_setEnv("FGLRESOURCEPATH", l_pathList)
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION setImagePath() RETURNS ()
+	DEFINE l_pathList STRING
+	DEFINE l_defFontList STRING
+	DEFINE l_c base.Channel
+	IF NOT os.path.exists(C_IMAGEPATHLIST) THEN RETURN END IF
+	LET l_c = base.Channel.create()
+	CALL l_c.openFile(C_IMAGEPATHLIST,"r")
+	WHILE NOT l_c.isEof()
+		LET l_pathList = l_pathList.append( l_c.readLine())||os.path.pathSeparator()
+	END WHILE
+	LET l_defFontList = os.path.join("lib","image2font.txt")
+	LET l_pathList = l_pathList.append( os.path.join(fgl_getEnv("FGLDIR"),l_defFontList))
+	DISPLAY "ImagePath:",l_pathList
+	CALL fgl_setEnv("FGLIMAGEPATH", l_pathList)
+END FUNCTION
