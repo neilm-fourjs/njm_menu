@@ -64,7 +64,7 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group environment="value:FGLIMAGEPATH=..,value:CUSTOM_DB=custom_db.json,value:FJS_GL_DBGLEV=3,value:DBNAME=njm_demo_db" id="75644415" label="njm_menu" language="Genero" targetDirectory="$(ProjectDir)/../njm_app_bin">
+  <Group environment="value:BASE=$(ProjectDIR),value:FGLIMAGEPATH=$(BASE):$(FGLDIR)/lib/image2font.txt,value:CUSTOM_DB=custom_db.json,value:FJS_GL_DBGLEV=3,value:DBNAME=njm_demo_db" id="75644415" label="njm_menu" language="Genero" targetDirectory="$(ProjectDir)/../njm_app_bin">
     <Application binaryName="container" id="1347713174" label="container">
       <File filePath="src/container.4gl"/>
       <File filePath="etc/container.4sm"/>
