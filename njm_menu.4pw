@@ -77,7 +77,10 @@
       <File filePath="etc/default_GBC.4st"/>
       <File filePath="etc/default_GDC.4st"/>
     </Library>
-    <ExtProject filePath="../g2_lib/g2_lib.4pw" id="1836661206"/>
+    <Group id="-1373519324" label="External">
+      <ExtProject filePath="../g2_lib/g2_lib.4pw" id="1836661206"/>
+      <ExtProject filePath="../njm_demo_db/njm_demo_db.4pw" id="1265940743"/>
+    </Group>
     <Library binaryName="lib_login" dependencies="1836661206_14000,1265940743_1986" id="-1010625895" label="lib_login">
       <File filePath="src/lib_login.4gl"/>
       <File filePath="src/login.per"/>
@@ -90,7 +93,6 @@
       <File filePath="src/menu_mnt.4gl"/>
       <File filePath="src/menu_mnt.per"/>
     </Application>
-    <ExtProject filePath="../njm_demo_db/njm_demo_db.4pw" id="1265940743"/>
     <Application binaryName="njm_menu" dependencies="14000,1986,1836661206_14000,1265940743_1986,1742005202,-1010625895" id="18736" label="njm_menu">
       <File filePath="src/menu.4gl"/>
       <File filePath="src/menu.per"/>
