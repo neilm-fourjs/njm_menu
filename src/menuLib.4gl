@@ -6,8 +6,8 @@ IMPORT FGL lib_login
 
 &include "schema.inc"
 
-CONSTANT C_RESOURCEPATHLIST = "../etc/resourcePath.txt"
-CONSTANT C_IMAGEPATHLIST = "../etc/imagePath.txt"
+CONSTANT C_RESOURCEPATHLIST = "../resources/resourcePath.txt"
+CONSTANT C_IMAGEPATHLIST = "../resources/imagePath.txt"
 PUBLIC DEFINE m_curMenu SMALLINT
 PUBLIC DEFINE m_args STRING
 
